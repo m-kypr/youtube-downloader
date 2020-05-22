@@ -78,7 +78,7 @@ class GUI(QWidget):
 
     def _download(self):
         with youtube_dl.YoutubeDL(ydl_opts) as dl:
-            os.chdir(self.dir.toPlainText)
+            os.chdir(self.dir.toPlainText())
             try:
                 dl.download(self.link.toPlainText().splitlines())
             except Exception as e:
