@@ -49,10 +49,11 @@ class GUI(QWidget):
         self.btn.clicked.connect(self.download)
         self.extract = QCheckBox('Extract Audio')
         self.extract.setChecked(True)
+        self.dir = QTextEdit('E:/Musik', self)
         layout.addWidget(self.link, 0, 0)
         layout.addWidget(self.btn, 0, 1)
         layout.addWidget(self.extract, 0, 2)
-
+        layout.addWidget(self.dir, 0, 3)
         self.horizontalGroupBox.setLayout(layout)
 
     def center(self):
@@ -77,7 +78,7 @@ class GUI(QWidget):
 
     def _download(self):
         with youtube_dl.YoutubeDL(ydl_opts) as dl:
-            os.chdir('E:/Musik')
+            os.chdir(self.dir.toPlainText)
             try:
                 dl.download(self.link.toPlainText().splitlines())
             except Exception as e:
